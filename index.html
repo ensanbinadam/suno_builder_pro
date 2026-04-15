@@ -1,0 +1,1830 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      لوحة مصطلحات Suno البشرية المتقدمة | Suno Human Terms Builder Pro
+    </title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap");
+
+      :root {
+        --bg: #f0f4ff;
+        --panel: rgba(255, 255, 255, 0.97);
+        --line: rgba(37, 99, 235, 0.1);
+        --text: #1e293b;
+        --muted: #64748b;
+        --accent: #2563eb;
+        --accent-2: #7c3aed;
+        --good: #059669;
+        --danger: #dc2626;
+        --shadow: 0 8px 32px rgba(37, 99, 235, 0.08), 0 2px 8px rgba(0,0,0,0.04);
+        --ease: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+
+      body {
+        margin: 0;
+        font-family: "Tajawal", system-ui, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        background-image:
+          radial-gradient(ellipse 80% 60% at 20% 0%, rgba(37,99,235,0.06) 0%, transparent 70%),
+          radial-gradient(ellipse 60% 50% at 80% 100%, rgba(124,58,237,0.05) 0%, transparent 70%);
+        background-attachment: fixed;
+        line-height: 1.65;
+      }
+
+      /* ── Page wrapper ── */
+      .page {
+        width: min(1780px, calc(100% - 24px));
+        margin: 20px auto 40px;
+      }
+
+      /* ── Hero ── */
+      .hero {
+        border: 1px solid rgba(37,99,235,0.15);
+        border-radius: 24px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        padding: 28px 36px 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(37,99,235,0.03) 0%, rgba(124,58,237,0.03) 100%);
+        pointer-events: none;
+      }
+
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: 2.4rem;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
+      }
+      .hero h1 span {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .hero p {
+        margin: 0 auto;
+        color: var(--muted);
+        max-width: 820px;
+        font-size: 1rem;
+      }
+      .hero-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+        justify-content: center;
+      }
+      .badge {
+        border: 1px solid rgba(37,99,235,0.25);
+        border-radius: 999px;
+        padding: 5px 14px;
+        background: rgba(37, 99, 235, 0.07);
+        color: var(--accent);
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      /* ── Layout ── */
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.3fr) minmax(420px, 0.7fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      /* ── Panels ── */
+      .panel {
+        border: 1px solid rgba(37,99,235,0.12);
+        border-radius: 22px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .panel-head {
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid var(--line);
+        background: linear-gradient(to bottom, rgba(37,99,235,0.03), transparent);
+        border-top-left-radius: 22px;
+        border-top-right-radius: 22px;
+      }
+      .panel-head h2 {
+        margin: 0 0 4px;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+      .panel-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .panel-body {
+        padding: 20px 24px;
+      }
+      .builder-panel .panel-body {
+        max-height: calc(100vh - 160px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #c7d2fe transparent;
+      }
+      .builder-panel .panel-body::-webkit-scrollbar { width: 6px; }
+      .builder-panel .panel-body::-webkit-scrollbar-thumb {
+        background: #c7d2fe;
+        border-radius: 999px;
+      }
+      .builder-panel .panel-body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      /* ── Sections ── */
+      .section {
+        border: 1px solid rgba(37,99,235,0.08);
+        border-radius: 16px;
+        padding: 18px 20px;
+        background: #ffffff;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(37,99,235,0.04);
+        transition: box-shadow 0.2s;
+      }
+      .section:hover {
+        box-shadow: 0 4px 16px rgba(37,99,235,0.08);
+      }
+
+      .section-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(37,99,235,0.08);
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+      .section-title small {
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.8rem;
+        background: rgba(37,99,235,0.06);
+        color: var(--accent);
+        padding: 3px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(37,99,235,0.15);
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+        background: rgba(37, 99, 235, 0.04);
+        padding: 9px 13px;
+        border-radius: 10px;
+        border-right: 3px solid var(--accent);
+        line-height: 1.6;
+      }
+
+      .group-title {
+        margin: 14px 0 8px;
+        font-weight: 700;
+        color: #334155;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+      .group-title::before {
+        content: "";
+        display: block;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+      }
+
+      /* ── Rows / flex areas ── */
+      .search-row,
+      .tools-row,
+      .actions,
+      .packs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      /* ── Chips ── */
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .chip {
+        border: 1.5px solid rgba(203,213,225,0.7);
+        background: #f8faff;
+        color: var(--text);
+        padding: 8px 12px;
+        border-radius: 12px;
+        font: inherit;
+        cursor: pointer;
+        transition: var(--ease);
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: right;
+        min-width: 140px;
+      }
+      .chip:hover {
+        border-color: rgba(37, 99, 235, 0.45);
+        background: rgba(37,99,235,0.04);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(37,99,235,0.1);
+      }
+      .chip.active {
+        background: linear-gradient(135deg, rgba(37,99,235,0.09), rgba(124,58,237,0.09));
+        border-color: var(--accent);
+        box-shadow: 0 2px 8px rgba(37,99,235,0.18);
+      }
+      .chip .en {
+        font-size: 0.88rem;
+        font-weight: 800;
+        line-height: 1.3;
+        direction: ltr;
+        text-align: left;
+        color: var(--accent);
+      }
+      .chip .ar {
+        font-size: 0.8rem;
+        color: var(--muted);
+        line-height: 1.25;
+        margin-top: 3px;
+      }
+
+      /* ── Inputs ── */
+      input[type="text"],
+      textarea {
+        width: 100%;
+        border: 1.5px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 11px 14px;
+        background: #f8faff;
+        color: var(--text);
+        font: inherit;
+        transition: var(--ease);
+        font-size: 0.97rem;
+      }
+      input[type="text"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      }
+
+      .compact-input { flex: 1 1 260px; }
+
+      textarea {
+        min-height: 110px;
+        resize: vertical;
+        line-height: 1.8;
+      }
+      .lyrics-box {
+        min-height: 240px;
+        font-size: 1rem;
+      }
+
+      .output-editable {
+        width: 100%;
+        min-height: 240px;
+        border: 0;
+        border-radius: 0;
+        background: #ffffff;
+        box-shadow: none !important;
+        resize: vertical;
+        direction: rtl;
+        text-align: right;
+        padding: 16px;
+        line-height: 1.8;
+        font-size: 0.98rem;
+      }
+      .output-editable[readonly] {
+        background: #fafbff;
+        cursor: default;
+      }
+
+      /* ── Buttons ── */
+      .btn {
+        border: 1.5px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 9px 16px;
+        font: inherit;
+        font-weight: 700;
+        font-size: 0.92rem;
+        cursor: pointer;
+        transition: var(--ease);
+        background: #ffffff;
+        color: var(--text);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      }
+      .btn:hover {
+        border-color: rgba(37,99,235,0.3);
+        box-shadow: 0 4px 10px rgba(37,99,235,0.08);
+        transform: translateY(-1px);
+      }
+      .btn:active { transform: translateY(0); }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #fff;
+        border: none;
+      }
+      .btn-primary:hover {
+        box-shadow: 0 6px 16px rgba(37,99,235,0.3);
+      }
+
+      .btn-mode-active {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+      }
+
+      code {
+        background: rgba(37,99,235,0.07);
+        padding: 2px 7px;
+        border-radius: 6px;
+        font-size: 0.88em;
+        color: var(--accent);
+      }
+
+      .btn-good {
+        background: rgba(5, 150, 105, 0.07);
+        color: #065f46;
+        border-color: rgba(5, 150, 105, 0.25);
+      }
+      .btn-good:hover {
+        background: rgba(5, 150, 105, 0.13);
+        border-color: rgba(5, 150, 105, 0.45);
+      }
+
+      .btn-danger {
+        background: rgba(220, 38, 38, 0.07);
+        color: #991b1b;
+        border-color: rgba(220, 38, 38, 0.25);
+      }
+      .btn-danger:hover {
+        background: rgba(220, 38, 38, 0.13);
+        border-color: rgba(220, 38, 38, 0.45);
+      }
+
+      /* ── Tag buttons ── */
+      .tag-btn {
+        border: 1.5px solid rgba(37,99,235,0.18);
+        border-radius: 999px;
+        padding: 6px 14px;
+        background: rgba(37,99,235,0.05);
+        color: var(--accent);
+        font: inherit;
+        font-weight: 700;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition: var(--ease);
+      }
+      .tag-btn:hover {
+        background: rgba(37,99,235,0.12);
+        border-color: rgba(37,99,235,0.4);
+      }
+
+      .quick-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+        padding: 10px 12px;
+        background: rgba(37,99,235,0.03);
+        border-radius: 12px;
+        border: 1px solid rgba(37,99,235,0.1);
+      }
+
+      /* ── Output cards ── */
+      .output-card {
+        border: 1.5px solid rgba(37,99,235,0.12);
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ffffff;
+        margin-bottom: 14px;
+        box-shadow: 0 2px 8px rgba(37,99,235,0.06);
+        transition: var(--ease);
+      }
+      .output-card:hover {
+        box-shadow: 0 6px 20px rgba(37,99,235,0.1);
+        border-color: rgba(37,99,235,0.25);
+      }
+
+      .output-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(37,99,235,0.08);
+        background: linear-gradient(to bottom, rgba(37,99,235,0.04), rgba(37,99,235,0.01));
+      }
+      .output-head h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .copy-btn {
+        border: none;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font: inherit;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #fff;
+        transition: var(--ease);
+      }
+      .copy-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+      }
+
+      pre {
+        margin: 0;
+        padding: 16px;
+        white-space: pre-wrap;
+        font-family: inherit;
+        font-size: 0.97rem;
+        min-height: 80px;
+        color: #0f172a;
+        direction: ltr;
+        text-align: left;
+        font-weight: 500;
+        background: #ffffff;
+        line-height: 1.7;
+      }
+
+      .mini-note {
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px dashed rgba(37,99,235,0.25);
+        background: rgba(37,99,235,0.04);
+        color: #334155;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        line-height: 1.6;
+      }
+      .mini-note::before {
+        content: "💡";
+        font-size: 1.1rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+
+      .counter {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(37,99,235,0.07);
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        border: 1px solid rgba(37,99,235,0.15);
+      }
+
+      .pack-btn {
+        min-width: 130px;
+        background: rgba(37,99,235,0.05);
+        border-color: rgba(37,99,235,0.2);
+        color: var(--accent);
+        font-size: 0.88rem;
+      }
+      .pack-btn:hover {
+        background: rgba(37,99,235,0.1);
+        border-color: rgba(37,99,235,0.35);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      @media (max-width: 1150px) {
+        .layout { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 780px) {
+        .page {
+          width: min(100% - 16px, 100%);
+          margin-top: 10px;
+        }
+        .hero {
+          padding: 20px 18px;
+          text-align: right;
+        }
+        .hero h1 { font-size: 1.8rem; }
+        .hero-badges { justify-content: flex-start; }
+        .two-col { grid-template-columns: 1fr; }
+        .chip { min-width: 130px; }
+        .panel-head,
+        .panel-body,
+        .section { padding: 14px 16px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <section class="hero">
+        <h1><span>Suno</span> لوحة المصطلحات البشرية النهائية</h1>
+        <p>
+          نسخة مبنية للتجربة المباشرة: تختار من قائمة مصطلحات بشرية مترجمة،
+          للإنشاد الرجالي والنسائي وكورال الأطفال والبنات، وكل ضغطة تُضيف
+          المصطلح الإنجليزي نفسه إلى
+          <strong>Style</strong> أو <strong>Exclude</strong> مفصولًا بفاصلة فقط.
+          لا أوصاف طويلة، ولا تعقيد غير مفيد.
+        </p>
+        <div class="hero-badges">
+          <span class="badge">مصطلحات Suno مباشرة</span>
+          <span class="badge">تعريب واضح لكل مصطلح</span>
+          <span class="badge">حزم أسلوب وموانع جاهزة</span>
+          <span class="badge">Style / Exclude / Lyrics فقط</span>
+        </div>
+      </section>
+
+      <div class="layout">
+        <section class="panel builder-panel">
+          <div class="panel-head">
+            <h2>لوحة البناء</h2>
+            <p>
+              اختر من القوائم، أو أضف مصطلحك يدويًا. الناتج يكون كلمات فقط
+              مفصولة بفواصل.
+            </p>
+          </div>
+          <div class="panel-body">
+            <div class="section">
+              <div class="section-title">
+                <span>أبيات الشعر / Lyrics</span>
+                <small>التقسيمات الهيكلية + تحرير قالب الشعر</small>
+              </div>
+              <div class="hint">
+                ضع المؤشر داخل النص الأصلي أو النص النهائي، ثم فعّل زر
+                <strong>تحرير قالب الشعر</strong>. بعد ذلك سيُدرج الضغط على أي
+                مؤثر أسلوبي داخل الموضع الحالي بين أقواس <code>[]</code>. ويمكنك
+                التحرير في الحاويتين معًا أثناء هذا الوضع.
+              </div>
+              <div class="quick-tags">
+                <button class="tag-btn" type="button" data-tag="[Intro]">
+                  [Intro]
+                </button>
+                <button class="tag-btn" type="button" data-tag="[Verse]">
+                  [Verse]
+                </button>
+                <button class="tag-btn" type="button" data-tag="[Chorus]">
+                  [Chorus]
+                </button>
+                <button class="tag-btn" type="button" data-tag="[Bridge]">
+                  [Bridge]
+                </button>
+                <button class="tag-btn" type="button" data-tag="[Outro]">
+                  [Outro]
+                </button>
+                <button class="tag-btn" type="button" data-tag="[Pause]">
+                  [Pause]
+                </button>
+              </div>
+              <textarea
+                id="lyricsBox"
+                class="lyrics-box"
+                spellcheck="false"
+                placeholder="اكتب أبياتك هنا..."
+              ></textarea>
+              <div class="actions">
+                <button
+                  class="btn"
+                  id="lyricsInsertModeBtn"
+                  aria-pressed="false"
+                >
+                  تحرير قالب الشعر
+                </button>
+                <button class="btn" id="pauseBtn">
+                  توزيع الوقفات من الفواصل
+                </button>
+                <button class="btn" id="cleanupBtn">تنظيف التقطيعات</button>
+                <button class="btn" id="templateBtn">إدراج قالب</button>
+                <button class="btn btn-danger" id="clearLyricsBtn">
+                  تفريغ الشعر
+                </button>
+              </div>
+              <div class="mini-note">
+                القاعدة الذهبية هنا: <strong>Style قصير وواضح</strong>، و<strong
+                  >Exclude أوضح وأطول قليلًا</strong
+                >، والشعر في صندوقه منفصلًا.
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-title">
+                <span>الأسلوب / Style</span>
+                <small>مصطلحات بشرية فقط</small>
+              </div>
+              <div class="hint">
+                كل كبسة تضيف أو تزيل المصطلح. المخرجات تبقى بالإنجليزية فقط،
+                بينما الواجهة تشرحها بالعربية. وإذا فعّلت وضع
+                <strong>إدراج المؤثرات داخل Lyrics</strong> ثم وضعت المؤشر في
+                سطر داخل النص، فإن الضغط على المؤثر الأسلوبي سيدرجه هناك بين
+                أقواس <code>[]</code> بدل إضافته إلى Style العام.
+              </div>
+              <div class="search-row">
+                <input
+                  id="styleSearch"
+                  class="compact-input"
+                  type="text"
+                  placeholder="ابحث داخل مصطلحات الأسلوب..."
+                />
+              </div>
+
+              <div class="group-title">حزم أسلوب جاهزة</div>
+              <div class="packs" id="stylePacks"></div>
+
+              <div class="group-title">هوية الصوت</div>
+              <div id="style-identity" class="chips"></div>
+
+              <div class="group-title">عدد المؤدين والجماعية</div>
+              <div id="style-grouping" class="chips"></div>
+
+              <div class="group-title">خامة الصوت وقربه</div>
+              <div id="style-texture" class="chips"></div>
+
+              <div class="group-title">طريقة الأداء والنطق</div>
+              <div id="style-delivery" class="chips"></div>
+
+              <div class="group-title">الزخرفة والتحكم</div>
+              <div id="style-ornament" class="chips"></div>
+
+              <div class="group-title">الشعور الإنساني</div>
+              <div id="style-feel" class="chips"></div>
+
+              <div class="tools-row">
+                <input
+                  id="customStyleTerm"
+                  class="compact-input"
+                  type="text"
+                  placeholder="أضف مصطلحًا يدويًا للأسلوب، مثل: orthodox chant"
+                />
+                <button class="btn btn-good" id="addStyleTermBtn">
+                  إضافة للأسلوب
+                </button>
+                <button class="btn btn-danger" id="clearStyleBtn">
+                  تفريغ الأسلوب
+                </button>
+              </div>
+              <div style="margin-top: 10px">
+                <textarea
+                  id="styleBox"
+                  spellcheck="false"
+                  placeholder="سيُبنى الأسلوب هنا... مثال: male voice, dry voice, clear diction"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="section">
+              <div class="section-title">
+                <span>الموانع / Exclude</span>
+                <small>انسخها كما هي إلى خانة Exclude</small>
+              </div>
+              <div class="hint">
+                هنا نمنع الأشياء الشائعة التي يضيفها Suno تلقائيًا: مصاحبة،
+                إيقاع، كورال، لمعة إنتاجية، وبنية بوب.
+              </div>
+              <div class="search-row">
+                <input
+                  id="negativeSearch"
+                  class="compact-input"
+                  type="text"
+                  placeholder="ابحث داخل الموانع..."
+                />
+              </div>
+
+              <div class="group-title">حزم موانع جاهزة</div>
+              <div class="packs" id="negativePacks"></div>
+
+              <div class="group-title">موانع المصاحبة والآلات</div>
+              <div id="negative-accompaniment" class="chips"></div>
+
+              <div class="group-title">موانع الإيقاع والنبض</div>
+              <div id="negative-rhythm" class="chips"></div>
+
+              <div class="group-title">موانع الكورال والتكديس</div>
+              <div id="negative-grouping" class="chips"></div>
+
+              <div class="group-title">موانع اللمعة والإنتاج</div>
+              <div id="negative-production" class="chips"></div>
+
+              <div class="group-title">موانع قوالب البوب والهيكلة</div>
+              <div id="negative-structure" class="chips"></div>
+
+              <div class="group-title">موانع هويات صوتية لا تريدها</div>
+              <div id="negative-identity" class="chips"></div>
+
+              <div class="tools-row">
+                <input
+                  id="customNegativeTerm"
+                  class="compact-input"
+                  type="text"
+                  placeholder="أضف مانعًا يدويًا، مثل: choir"
+                />
+                <button class="btn btn-good" id="addNegativeTermBtn">
+                  إضافة للموانع
+                </button>
+                <button class="btn btn-danger" id="clearNegativeBtn">
+                  تفريغ الموانع
+                </button>
+              </div>
+              <div style="margin-top: 10px">
+                <textarea
+                  id="negativeBox"
+                  spellcheck="false"
+                  placeholder="سيُبنى exclude هنا... مثال: piano, percussion, choir"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel outputs-panel">
+          <div class="panel-head">
+            <h2>المخرجات الجاهزة للنسخ</h2>
+            <p>انسخ ما تحتاجه فقط: الأسلوب، الموانع، أو الشعر.</p>
+          </div>
+          <div class="panel-body">
+            <div class="output-card">
+              <div class="output-head">
+                <h3>Lyrics</h3>
+                <div style="display: flex; gap: 8px; align-items: center">
+                  <span id="lyricsCount" class="counter">0</span>
+                  <button class="copy-btn" data-copy="lyricsOutput">نسخ</button>
+                </div>
+              </div>
+              <textarea
+                id="lyricsOutput"
+                class="output-editable"
+                spellcheck="false"
+                readonly
+              ></textarea>
+            </div>
+
+            <div class="output-card">
+              <div class="output-head">
+                <h3>Style</h3>
+                <div style="display: flex; gap: 8px; align-items: center">
+                  <span id="styleCount" class="counter">0</span>
+                  <button class="copy-btn" data-copy="styleOutput">نسخ</button>
+                </div>
+              </div>
+              <pre id="styleOutput"></pre>
+            </div>
+
+            <div class="output-card">
+              <div class="output-head">
+                <h3>Exclude</h3>
+                <div style="display: flex; gap: 8px; align-items: center">
+                  <span id="negativeCount" class="counter">0</span>
+                  <button class="copy-btn" data-copy="negativeOutput">
+                    نسخ
+                  </button>
+                </div>
+              </div>
+              <pre id="negativeOutput"></pre>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "suno_human_terms_builder_pro_v3";
+      const STRUCTURAL_TAGS = new Set([
+        "intro",
+        "verse",
+        "chorus",
+        "bridge",
+        "outro",
+        "pause",
+        "refrain",
+        "pre-chorus",
+        "pre chorus",
+        "hook",
+        "instrumental",
+      ]);
+      let lyricsInsertMode = false;
+      let lastLyricsSelections = {
+        lyricsBox: { start: 0, end: 0 },
+        lyricsOutput: { start: 0, end: 0 },
+      };
+      let activeLyricsTarget = "lyricsBox";
+
+      const styleGroups = {
+        identity: [
+          { term: "Arabic sacred recitation", ar: "ترتيل/إنشاد عربي مقدس" },
+          { term: "Arabic hymn", ar: "ترنيمة/نشيد عربي" },
+          { term: "male voice", ar: "صوت رجالي" },
+          { term: "solo male voice", ar: "صوت رجالي منفرد" },
+          { term: "male lead", ar: "مؤدٍ رجالي رئيسي" },
+          { term: "baritone male voice", ar: "صوت رجالي باريتون" },
+          { term: "tenor male voice", ar: "صوت رجالي تينور" },
+          { term: "low male voice", ar: "صوت رجالي منخفض" },
+          { term: "bass male voice", ar: "صوت رجالي جهير" },
+          { term: "female voice", ar: "صوت نسائي" },
+          { term: "solo female voice", ar: "صوت نسائي منفرد" },
+          { term: "female lead", ar: "مؤدية رئيسية" },
+          { term: "female lead vocals", ar: "غناء رئيسي نسائي" },
+          { term: "feminine voice", ar: "صوت أنثوي" },
+          { term: "girl voice", ar: "صوت طفلة" },
+          { term: "young female voice", ar: "صوت أنثوي صغير" },
+          { term: "child voice", ar: "صوت طفل/طفلة" },
+          { term: "boy voice", ar: "صوت صبي" },
+        ],
+        grouping: [
+          { term: "solo voice", ar: "صوت منفرد" },
+          { term: "human voices", ar: "أصوات بشرية" },
+          { term: "men only", ar: "رجال فقط" },
+          { term: "women only", ar: "نساء فقط" },
+          { term: "male choir", ar: "كورال رجالي" },
+          { term: "male choir only", ar: "كورال رجالي فقط" },
+          { term: "female choir", ar: "كورال نسائي" },
+          { term: "female choir only", ar: "كورال نسائي فقط" },
+          { term: "boys choir", ar: "كورال صبيان" },
+          { term: "children's choir", ar: "كورال أطفال" },
+          { term: "girls choir", ar: "كورال بنات" },
+          { term: "girls choir only", ar: "كورال بنات فقط" },
+          { term: "girls voices only", ar: "أصوات بنات فقط" },
+          { term: "children's choir responses", ar: "ردود كورال الأطفال" },
+          { term: "girls choir responses", ar: "ردود كورال البنات" },
+          {
+            term: "pure clear male children's choir",
+            ar: "كورال أطفال ذكور نقي وواضح",
+          },
+          { term: "pure clear girls choir", ar: "كورال بنات نقي وواضح" },
+          { term: "dry human choir", ar: "كورال بشري جاف" },
+          { term: "unison", ar: "يونيسون/صوت موحد" },
+          { term: "unison children's choir", ar: "كورال أطفال بصوت موحد" },
+          { term: "unison girls choir", ar: "كورال بنات بصوت موحد" },
+          { term: "no ensemble", ar: "بلا مجموعة أداء" },
+          { term: "no harmonies", ar: "بلا هارموني" },
+          { term: "no choir", ar: "بلا كورال" },
+        ],
+        texture: [
+          { term: "pure", ar: "نقي" },
+          { term: "pure voice", ar: "صوت نقي" },
+          { term: "clear voice", ar: "صوت واضح" },
+          { term: "dry voice", ar: "صوت جاف" },
+          { term: "intimate voice", ar: "صوت حميم قريب" },
+          { term: "warm voice", ar: "صوت دافئ" },
+          { term: "soft voice", ar: "صوت ناعم" },
+          { term: "soft female voice", ar: "صوت نسائي ناعم" },
+          { term: "airy vocal", ar: "صوت هوائي" },
+          { term: "smooth male voice", ar: "صوت رجالي ناعم" },
+          { term: "smooth female voice", ar: "صوت نسائي ناعم مسترسل" },
+          { term: "raspy male vocal", ar: "صوت رجالي مبحوح خفيف" },
+          { term: "rough male vocals", ar: "صوت رجالي خشن" },
+          { term: "velvety", ar: "مخملي" },
+          { term: "whispery", ar: "هامس" },
+          { term: "grainy", ar: "محبب/حبّي" },
+          { term: "textured vocal grit", ar: "خشونة صوتية محكمة" },
+          { term: "close microphone", ar: "ميكروفون قريب" },
+          { term: "nearby microphone", ar: "ميكروفون قريب جدًا" },
+          { term: "short vocal echo", ar: "صدى صوتي قصير" },
+          { term: "soft human echo", ar: "صدى بشري خفيف" },
+          { term: "centered vocal", ar: "صوت مركزي" },
+          { term: "front vocal", ar: "صوت أمامي" },
+        ],
+        delivery: [
+          { term: "a cappella", ar: "أكابيلا/بلا آلات" },
+          { term: "monophonic", ar: "أحادي اللحن" },
+          { term: "monophonic chant", ar: "إنشاد أحادي" },
+          { term: "recitative", ar: "إلقاء إنشادي" },
+          { term: "speech", ar: "إلقاء كلامي" },
+          { term: "speech-like delivery", ar: "أداء قريب من الكلام" },
+          { term: "spoken delivery", ar: "أداء منطوق" },
+          { term: "narrative", ar: "سردي" },
+          { term: "clear diction", ar: "مخارج واضحة" },
+          { term: "precise articulation", ar: "نطق دقيق" },
+          { term: "teacher-like articulation", ar: "نطق شبيه بالمعلمة/المعلم" },
+          { term: "child-friendly articulation", ar: "نطق مناسب للأطفال" },
+          { term: "restrained delivery", ar: "أداء مقيد" },
+          { term: "controlled delivery", ar: "أداء مضبوط" },
+          { term: "plain delivery", ar: "أداء بسيط مباشر" },
+          { term: "devotional delivery", ar: "أداء تعبدي" },
+          { term: "heartfelt delivery", ar: "أداء من القلب" },
+          { term: "earnest delivery", ar: "أداء صادق وجاد" },
+          { term: "sincere delivery", ar: "أداء صادق" },
+        ],
+        ornament: [
+          { term: "minimal melisma", ar: "زخرفة قليلة جدًا" },
+          { term: "melisma", ar: "زخرفة لحنية" },
+          { term: "restrained ornamentation", ar: "زخرفة مقيدة" },
+          { term: "straight tone", ar: "نبرة مستقيمة" },
+          { term: "light vibrato", ar: "اهتزاز خفيف" },
+          { term: "no vibrato", ar: "بلا اهتزاز" },
+          { term: "controlled vibrato", ar: "اهتزاز مضبوط" },
+          { term: "truncated consonants", ar: "صوامت مقطوعة/مختصرة" },
+          { term: "human syllable praise form", ar: "صيغة مدح بمقاطع بشرية" },
+        ],
+        feel: [
+          { term: "devotional", ar: "تعبدي" },
+          { term: "sincere", ar: "صادق" },
+          { term: "solemn", ar: "وقور" },
+          { term: "dignified", ar: "مهيب/رصين" },
+          { term: "heartfelt", ar: "صادق المشاعر" },
+          { term: "humble", ar: "متواضع" },
+          { term: "tender", ar: "رقيق" },
+          { term: "gentle", ar: "لطيف/هادئ" },
+          { term: "innocent", ar: "بريء" },
+          { term: "plaintive", ar: "شجي" },
+          { term: "reflective", ar: "تأملي" },
+          { term: "passionate", ar: "عاطفي قوي" },
+          { term: "powerful vocal", ar: "صوت قوي" },
+          { term: "powerful vocals", ar: "أصوات قوية" },
+          { term: "triumphant lift", ar: "رفعة ظافرة" },
+          { term: "celebratory", ar: "احتفالي" },
+          { term: "angelic chorus", ar: "كورال ملائكي" },
+        ],
+      };
+
+      const stylePacks = [
+        {
+          name: "إنشاد نسائي منفرد",
+          terms: [
+            "female voice",
+            "solo female voice",
+            "pure voice",
+            "clear voice",
+            "dry voice",
+            "close microphone",
+          ],
+        },
+        {
+          name: "معلمة + كورال بنات",
+          terms: [
+            "female lead vocals",
+            "girls choir",
+            "pure",
+            "clear voice",
+            "dry voice",
+            "close microphone",
+            "unison",
+          ],
+        },
+        {
+          name: "كورال بنات فقط",
+          terms: [
+            "girls choir",
+            "girls choir only",
+            "pure clear girls choir",
+            "dry human choir",
+            "unison",
+          ],
+        },
+        {
+          name: "طفولي بناتي",
+          terms: [
+            "girl voice",
+            "pure voice",
+            "soft female voice",
+            "clear diction",
+            "close microphone",
+          ],
+        },
+      ];
+
+      const negativeGroups = {
+        accompaniment: [
+          { term: "music", ar: "موسيقى" },
+          { term: "instruments", ar: "آلات" },
+          { term: "piano", ar: "بيانو" },
+          { term: "acoustic piano", ar: "بيانو صوتي" },
+          { term: "guitar", ar: "جيتار" },
+          { term: "acoustic guitar", ar: "جيتار أكوستك" },
+          { term: "electric guitar", ar: "جيتار كهربائي" },
+          { term: "oud", ar: "عود" },
+          { term: "qanun", ar: "قانون" },
+          { term: "ney", ar: "ناي" },
+          { term: "strings", ar: "وتريات" },
+          { term: "violins", ar: "كمانات" },
+          { term: "cello", ar: "تشيلو" },
+          { term: "bass", ar: "باس" },
+          { term: "bass guitar", ar: "جيتار باس" },
+          { term: "fretless bass", ar: "باس فريتلس" },
+          { term: "synth", ar: "سنث" },
+          { term: "synth pad", ar: "باد سنث" },
+          { term: "digital pads", ar: "بادز رقمية" },
+          { term: "glockenspiel", ar: "غلوكنشبيل" },
+          { term: "bell-like synth", ar: "سنث جَرَسي" },
+          { term: "woodwinds", ar: "نفخ خشبي" },
+          { term: "brass", ar: "نحاسيات" },
+          { term: "orchestra", ar: "أوركسترا" },
+          { term: "accompaniment", ar: "مصاحبة" },
+          { term: "instrumental", ar: "آلي/بدون غناء" },
+        ],
+        rhythm: [
+          { term: "percussion", ar: "إيقاع/بيركشن" },
+          { term: "drums", ar: "طبول" },
+          { term: "frame drum", ar: "دف/طبلة إطار" },
+          { term: "shaker", ar: "شيكر" },
+          { term: "riq", ar: "رق" },
+          { term: "darbuka", ar: "دربكة" },
+          { term: "kick drum", ar: "ركلة درام" },
+          { term: "snare", ar: "سنير" },
+          { term: "backbeat", ar: "باك بيت" },
+          { term: "strong beats", ar: "ضربات قوية" },
+          { term: "steady beat", ar: "نبض ثابت" },
+          { term: "rhythm", ar: "إيقاع" },
+          { term: "4/4", ar: "ميزان 4/4" },
+          { term: "bpm pulse", ar: "نبض BPM واضح" },
+          { term: "march", ar: "مارش" },
+          { term: "vocal percussion", ar: "إيقاع صوتي" },
+          { term: "mouth percussion", ar: "إيقاع بالفم" },
+          { term: "beat box", ar: "بيت بوكس" },
+          { term: "beatboxing", ar: "بيتبوكسينغ" },
+          { term: "breath rhythm", ar: "إيقاع بالنَّفَس" },
+          { term: "body percussion", ar: "إيقاع بالجسد" },
+          { term: "clap", ar: "تصفيق" },
+          { term: "stomp", ar: "دوس إيقاعي" },
+        ],
+        grouping: [
+          { term: "choir", ar: "كورال" },
+          { term: "choral", ar: "كورالي" },
+          { term: "angelic chorus", ar: "كورال ملائكي" },
+          { term: "harmonies", ar: "هارموني" },
+          { term: "harmonized chorus", ar: "لازمة متناغمة" },
+          { term: "ensemble", ar: "مجموعة أداء" },
+          { term: "layered vocals", ar: "طبقات صوتية" },
+          { term: "twin vocals", ar: "صوتان متوازيان" },
+          { term: "call and response", ar: "نداء وجواب" },
+          { term: "children's choir", ar: "كورال أطفال" },
+          { term: "boys choir", ar: "كورال صبيان" },
+          { term: "girls choir", ar: "كورال بنات" },
+          { term: "female choir", ar: "كورال نسائي" },
+          { term: "humming choir", ar: "كورال همهمة" },
+          { term: "layered humming", ar: "همهمة طبقية" },
+          { term: "oohs", ar: "آهات ooh" },
+          { term: "aahs", ar: "آهات aah" },
+          { term: "vocal pads", ar: "بادز صوتية" },
+          { term: "chant responses", ar: "ردود إنشادية" },
+          { term: "female vocals", ar: "أصوات نسائية" },
+        ],
+        production: [
+          { term: "reverb", ar: "ريڤيرب" },
+          { term: "room reverb", ar: "ريڤيرب غرفة" },
+          { term: "hall reverb", ar: "ريڤيرب قاعة" },
+          { term: "plate reverb", ar: "بليت ريفيرب" },
+          { term: "glossy production", ar: "إنتاج لامع" },
+          { term: "polished vocal layering", ar: "تلميع صوتي طبقي" },
+          { term: "high-fidelity sound", ar: "صوت عالي النقاء" },
+          { term: "wide stereo image", ar: "صورة ستيريو واسعة" },
+          { term: "cinematic", ar: "سينمائي" },
+          { term: "orchestral", ar: "أوركسترالي" },
+          { term: "epic", ar: "ملحمي" },
+          { term: "modern worship", ar: "وورشب حديث" },
+          { term: "ambient house", ar: "أمبينت هاوس" },
+        ],
+        structure: [
+          { term: "pop", ar: "بوب" },
+          { term: "anthem", ar: "أنثِم/نشيد جماهيري" },
+          { term: "popular", ar: "شعبي/بوب شائع" },
+          { term: "catchy chorus", ar: "لازمة جذابة" },
+          { term: "celebratory march", ar: "مارش احتفالي" },
+          { term: "orchestral pop", ar: "بوب أوركسترالي" },
+          { term: "christian pop", ar: "بوب كنسي" },
+          { term: "dramatic pop", ar: "بوب درامي" },
+          { term: "contemporary", ar: "معاصر" },
+          { term: "ballad", ar: "بالاد" },
+          { term: "verse-chorus pop structure", ar: "بنية بوب مقطع/لازمة" },
+          { term: "chorus lift", ar: "رفع اللازمة" },
+        ],
+        identity: [
+          { term: "male voice", ar: "صوت رجالي" },
+          { term: "solo male voice", ar: "صوت رجالي منفرد" },
+          { term: "male lead", ar: "مؤدٍ رجالي رئيسي" },
+          { term: "baritone male voice", ar: "صوت رجالي باريتون" },
+          { term: "tenor male voice", ar: "صوت رجالي تينور" },
+          { term: "low male voice", ar: "صوت رجالي منخفض" },
+          { term: "bass male voice", ar: "صوت رجالي جهير" },
+          { term: "men only", ar: "رجال فقط" },
+          { term: "male choir", ar: "كورال رجالي" },
+          { term: "male choir only", ar: "كورال رجالي فقط" },
+          { term: "boys choir", ar: "كورال صبيان" },
+          { term: "female voice", ar: "صوت نسائي" },
+          { term: "female lead vocals", ar: "غناء رئيسي نسائي" },
+          { term: "feminine voice", ar: "صوت أنثوي" },
+          { term: "girl voice", ar: "صوت طفلة" },
+          { term: "child voice", ar: "صوت طفل/طفلة" },
+          { term: "cute voice", ar: "صوت لطيف طفولي" },
+          { term: "airy vocal", ar: "صوت هوائي" },
+          { term: "raspy vocal", ar: "صوت مبحوح" },
+        ],
+      };
+
+      const negativePacks = [
+        {
+          name: "منع المصاحبة",
+          terms: [
+            "music",
+            "instruments",
+            "piano",
+            "acoustic piano",
+            "guitar",
+            "acoustic guitar",
+            "oud",
+            "strings",
+            "bass",
+            "synth",
+            "accompaniment",
+          ],
+        },
+        {
+          name: "منع الإيقاع",
+          terms: [
+            "percussion",
+            "drums",
+            "frame drum",
+            "shaker",
+            "riq",
+            "darbuka",
+            "kick drum",
+            "snare",
+            "backbeat",
+            "4/4",
+            "bpm pulse",
+          ],
+        },
+        {
+          name: "منع الكورال",
+          terms: [
+            "choir",
+            "choral",
+            "harmonies",
+            "ensemble",
+            "layered vocals",
+            "call and response",
+          ],
+        },
+        {
+          name: "منع الهمهمة البشرية",
+          terms: [
+            "vocal percussion",
+            "mouth percussion",
+            "beat box",
+            "beatboxing",
+            "breath rhythm",
+            "humming choir",
+            "layered humming",
+            "oohs",
+            "aahs",
+            "vocal pads",
+            "chant responses",
+          ],
+        },
+        {
+          name: "منع اللمعة",
+          terms: [
+            "reverb",
+            "room reverb",
+            "hall reverb",
+            "plate reverb",
+            "glossy production",
+            "wide stereo image",
+            "cinematic",
+            "orchestral",
+          ],
+        },
+        {
+          name: "منع البوب",
+          terms: [
+            "pop",
+            "anthem",
+            "popular",
+            "orchestral pop",
+            "dramatic pop",
+            "verse-chorus pop structure",
+            "chorus lift",
+          ],
+        },
+        {
+          name: "منع الذكور",
+          terms: [
+            "male voice",
+            "solo male voice",
+            "male lead",
+            "baritone male voice",
+            "male choir",
+            "boys choir",
+            "men only",
+          ],
+        },
+        {
+          name: "للإنشاد الجاف",
+          terms: [
+            "music",
+            "instruments",
+            "piano",
+            "strings",
+            "percussion",
+            "drums",
+            "reverb",
+            "choir",
+            "harmonies",
+            "backbeat",
+          ],
+        },
+      ];
+
+      function uniqueClean(values) {
+        return [
+          ...new Set(values.map((v) => (v || "").trim()).filter(Boolean)),
+        ];
+      }
+
+      function parseCommaText(text) {
+        return uniqueClean(text.split(",").map((v) => v.trim()));
+      }
+
+      function joinTerms(values) {
+        return uniqueClean(values).join(", ");
+      }
+
+      function buildChipHTML(item, target) {
+        return `
+          <button type="button" class="chip" data-target="${target}" data-term="${item.term.replace(/"/g, "&quot;")}">
+            <span class="en">${item.term}</span>
+            <span class="ar">${item.ar}</span>
+          </button>
+        `;
+      }
+
+      function renderGroup(containerId, items, target) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = items
+          .map((item) => buildChipHTML(item, target))
+          .join("");
+      }
+
+      function renderStylePacks() {
+        const container = document.getElementById("stylePacks");
+        container.innerHTML = stylePacks
+          .map(
+            (pack, idx) => `
+          <button type="button" class="btn pack-btn" data-style-pack-index="${idx}">${pack.name}</button>
+        `,
+          )
+          .join("");
+      }
+
+      function renderPacks() {
+        const container = document.getElementById("negativePacks");
+        container.innerHTML = negativePacks
+          .map(
+            (pack, idx) => `
+          <button type="button" class="btn pack-btn" data-pack-index="${idx}">${pack.name}</button>
+        `,
+          )
+          .join("");
+      }
+
+      function syncActiveChips() {
+        const styleTerms = new Set(
+          parseCommaText(document.getElementById("styleBox").value),
+        );
+        const negativeSet = new Set(
+          parseCommaText(document.getElementById("negativeBox").value),
+        );
+
+        document
+          .querySelectorAll('.chip[data-target="style"]')
+          .forEach((chip) => {
+            chip.classList.toggle("active", styleTerms.has(chip.dataset.term));
+          });
+        document
+          .querySelectorAll('.chip[data-target="negative"]')
+          .forEach((chip) => {
+            chip.classList.toggle("active", negativeSet.has(chip.dataset.term));
+          });
+      }
+
+      function toggleTerm(targetId, term) {
+        const box = document.getElementById(targetId);
+        const terms = parseCommaText(box.value);
+        const set = new Set(terms);
+        if (set.has(term)) set.delete(term);
+        else set.add(term);
+        box.value = joinTerms([...set]);
+        generateOutputs();
+      }
+
+      function addTermsToBox(boxId, newTerms) {
+        const box = document.getElementById(boxId);
+        const terms = parseCommaText(box.value);
+        box.value = joinTerms([...terms, ...newTerms]);
+        generateOutputs();
+      }
+
+      function addCustomTerm(inputId, boxId) {
+        const input = document.getElementById(inputId);
+        const value = input.value.trim();
+        if (!value) return;
+        addTermsToBox(boxId, [value]);
+        input.value = "";
+      }
+
+      function filterChips(inputId, targetSelector) {
+        const q = document.getElementById(inputId).value.trim().toLowerCase();
+        document.querySelectorAll(targetSelector).forEach((chip) => {
+          const hay =
+            `${chip.querySelector(".en")?.textContent || ""} ${chip.querySelector(".ar")?.textContent || ""}`.toLowerCase();
+          chip.style.display = !q || hay.includes(q) ? "" : "none";
+        });
+      }
+
+      function getLyricsEditor(id) {
+        return document.getElementById(id);
+      }
+
+      function updateLyricsSelection(targetId = null) {
+        const resolvedId =
+          targetId ||
+          (document.activeElement &&
+          (document.activeElement.id === "lyricsBox" ||
+            document.activeElement.id === "lyricsOutput")
+            ? document.activeElement.id
+            : activeLyricsTarget);
+        const el = getLyricsEditor(resolvedId);
+        if (!el) return;
+        activeLyricsTarget = resolvedId;
+        lastLyricsSelections[resolvedId] = {
+          start: el.selectionStart ?? 0,
+          end: el.selectionEnd ?? 0,
+        };
+      }
+
+      function setLyricsInsertMode(isOn) {
+        lyricsInsertMode = Boolean(isOn);
+        const btn = document.getElementById("lyricsInsertModeBtn");
+        const outputEl = document.getElementById("lyricsOutput");
+        if (btn) {
+          btn.classList.toggle("btn-mode-active", lyricsInsertMode);
+          btn.setAttribute("aria-pressed", lyricsInsertMode ? "true" : "false");
+          btn.textContent = lyricsInsertMode
+            ? "تحرير قالب الشعر: مفعّل"
+            : "تحرير قالب الشعر";
+        }
+        if (outputEl) {
+          outputEl.readOnly = !lyricsInsertMode;
+        }
+      }
+
+      function isBracketLine(line) {
+        const trimmed = (line || "").trim();
+        return /^\[[^\]]+\]$/.test(trimmed);
+      }
+
+      function isStructuralBracketLine(line) {
+        const trimmed = (line || "").trim();
+        if (!isBracketLine(trimmed)) return false;
+        const inner = trimmed.slice(1, -1).trim().toLowerCase();
+        return STRUCTURAL_TAGS.has(inner);
+      }
+
+      function isStyleBracketLine(line) {
+        return isBracketLine(line) && !isStructuralBracketLine(line);
+      }
+
+      function mergeBracketTerm(line, term) {
+        const trimmed = (line || "").trim();
+        const inner = trimmed.slice(1, -1).trim();
+        const existing = inner
+          ? inner
+              .split(",")
+              .map((v) => v.trim())
+              .filter(Boolean)
+          : [];
+        return `[${joinTerms([...existing, term])}]`;
+      }
+
+      function getCurrentLineIndex(text, cursor) {
+        return text.slice(0, cursor).split("\n").length - 1;
+      }
+
+      function getLineStartPosition(lines, targetIndex) {
+        let pos = 0;
+        for (let i = 0; i < targetIndex; i += 1) {
+          pos += lines[i].length + 1;
+        }
+        return pos;
+      }
+
+      function insertStyleTermIntoLyrics(term) {
+        const targetId = activeLyricsTarget || "lyricsBox";
+        const el = getLyricsEditor(targetId);
+        if (!el) return;
+        const text = el.value || "";
+        const sel = lastLyricsSelections[targetId] || {
+          start: text.length,
+          end: text.length,
+        };
+        const cursor =
+          document.activeElement === el
+            ? (el.selectionStart ?? text.length)
+            : Math.min(sel.start ?? text.length, text.length);
+
+        const lines = text.split("\n");
+        const currentIndex = getCurrentLineIndex(text, cursor);
+        const currentLine = lines[currentIndex] ?? "";
+        const previousLine = currentIndex > 0 ? lines[currentIndex - 1] : "";
+        let targetIndex = currentIndex;
+
+        if (isStructuralBracketLine(currentLine)) {
+          targetIndex = currentIndex + 1;
+          if (lines[targetIndex] && isStyleBracketLine(lines[targetIndex])) {
+            lines[targetIndex] = mergeBracketTerm(lines[targetIndex], term);
+          } else {
+            lines.splice(targetIndex, 0, `[${term}]`);
+          }
+        } else if (isStyleBracketLine(currentLine)) {
+          lines[currentIndex] = mergeBracketTerm(currentLine, term);
+          targetIndex = currentIndex;
+        } else if (isStyleBracketLine(previousLine)) {
+          lines[currentIndex - 1] = mergeBracketTerm(previousLine, term);
+          targetIndex = currentIndex - 1;
+        } else {
+          lines.splice(currentIndex, 0, `[${term}]`);
+          targetIndex = currentIndex;
+        }
+
+        el.value = lines.join("\n");
+        const newPos =
+          getLineStartPosition(lines, targetIndex) + lines[targetIndex].length;
+        el.focus();
+        el.setSelectionRange(newPos, newPos);
+        updateLyricsSelection(targetId);
+        generateOutputs();
+      }
+
+      function insertTag(tag) {
+        const targetId = lyricsInsertMode ? activeLyricsTarget : "lyricsBox";
+        const el =
+          getLyricsEditor(targetId) || document.getElementById("lyricsBox");
+        const start = el.selectionStart ?? el.value.length;
+        const end = el.selectionEnd ?? el.value.length;
+        const before = el.value.substring(0, start);
+        const after = el.value.substring(end);
+        const prefix = before && !before.endsWith("\n") ? "\n" : "";
+        const insertion = `${prefix}${tag}\n`;
+        el.value = before + insertion + after;
+        const pos = (before + insertion).length;
+        el.focus();
+        el.setSelectionRange(pos, pos);
+        updateLyricsSelection(targetId);
+        generateOutputs();
+      }
+
+      function cleanupText(text) {
+        return text
+          .replace(/\r/g, "")
+          .replace(/[ \t]+/g, " ")
+          .replace(/[ ]+\n/g, "\n")
+          .replace(/\n{3,}/g, "\n\n")
+          .trim();
+      }
+
+      function smartPause() {
+        const el = document.getElementById("lyricsBox");
+        el.value = cleanupText(
+          el.value
+            .replace(/[،,]+\s*/g, "\n[Pause]\n")
+            .replace(/\n{3,}/g, "\n\n"),
+        );
+        generateOutputs();
+      }
+
+      function cleanupLyrics() {
+        const el = document.getElementById("lyricsBox");
+        el.value = cleanupText(
+          el.value
+            .replace(/\[pause\]/gi, "[Pause]")
+            .replace(/\[chorus\]/gi, "[Chorus]")
+            .replace(/\[verse\]/gi, "[Verse]")
+            .replace(/\[bridge\]/gi, "[Bridge]")
+            .replace(/\[intro\]/gi, "[Intro]")
+            .replace(/\[outro\]/gi, "[Outro]"),
+        );
+        generateOutputs();
+      }
+
+      function insertTemplate() {
+        const el = document.getElementById("lyricsBox");
+        if (el.value.trim()) return;
+        el.value = `[Verse]\nمعلمنا كنهرٍ قد روانا\nوشاد لمجدنا العالي كيانا\n\n[Verse]\nأقام بعلمه للعلم شأنًا\nوتوجنا بعلمٍ قد حبانا\n\n[Pause]\n\n[Verse]\nجزاك الله يا أستاذ خيرًا\nأيا نورًا أضاء لنا الزمانا`;
+        generateOutputs();
+      }
+
+      function saveState() {
+        const data = {
+          style: document.getElementById("styleBox").value,
+          negative: document.getElementById("negativeBox").value,
+          lyrics: document.getElementById("lyricsBox").value,
+          lyricsOutput:
+            document.getElementById("lyricsOutput").value ||
+            document.getElementById("lyricsOutput").textContent ||
+            "",
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+          document.getElementById("styleBox").value = data.style || "";
+          document.getElementById("negativeBox").value = data.negative || "";
+          document.getElementById("lyricsBox").value = data.lyrics || "";
+          document.getElementById("lyricsOutput").value =
+            data.lyricsOutput || data.lyrics || "";
+        } catch (e) {
+          console.warn("Failed to load saved state", e);
+        }
+      }
+
+      function generateOutputs() {
+        const style = joinTerms(
+          parseCommaText(document.getElementById("styleBox").value),
+        );
+        const negative = joinTerms(
+          parseCommaText(document.getElementById("negativeBox").value),
+        );
+        const lyrics = cleanupText(document.getElementById("lyricsBox").value);
+        const outputEl = document.getElementById("lyricsOutput");
+        const currentOutputRaw = outputEl.value || outputEl.textContent || "";
+        const finalLyrics = cleanupText(
+          lyricsInsertMode ? currentOutputRaw : currentOutputRaw || lyrics,
+        );
+
+        document.getElementById("styleBox").value = style;
+        document.getElementById("negativeBox").value = negative;
+        document.getElementById("lyricsBox").value = lyrics;
+
+        document.getElementById("styleOutput").textContent = style;
+        document.getElementById("negativeOutput").textContent = negative;
+        outputEl.value = lyricsInsertMode ? finalLyrics : lyrics;
+
+        document.getElementById("styleCount").textContent =
+          `${style ? parseCommaText(style).length : 0} مصطلح`;
+        document.getElementById("negativeCount").textContent =
+          `${negative ? parseCommaText(negative).length : 0} مانع`;
+        document.getElementById("lyricsCount").textContent =
+          `${(outputEl.value || "").trim() ? outputEl.value.split("\n").filter(Boolean).length : 0} سطر`;
+
+        syncActiveChips();
+        saveState();
+      }
+
+      async function copyOutput(id, btn) {
+        const el = document.getElementById(id);
+        const text = ("value" in el ? el.value : el.textContent) || "";
+        try {
+          await navigator.clipboard.writeText(text);
+          const old = btn.textContent;
+          btn.textContent = "✔ نُسخ";
+          btn.style.background = "#00c58e";
+          setTimeout(() => {
+            btn.textContent = old;
+            btn.style.background = "var(--accent)";
+          }, 1400);
+        } catch {
+          alert("تعذر النسخ التلقائي.");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderGroup("style-identity", styleGroups.identity, "style");
+        renderGroup("style-grouping", styleGroups.grouping, "style");
+        renderGroup("style-texture", styleGroups.texture, "style");
+        renderGroup("style-delivery", styleGroups.delivery, "style");
+        renderGroup("style-ornament", styleGroups.ornament, "style");
+        renderGroup("style-feel", styleGroups.feel, "style");
+
+        renderGroup(
+          "negative-accompaniment",
+          negativeGroups.accompaniment,
+          "negative",
+        );
+        renderGroup("negative-rhythm", negativeGroups.rhythm, "negative");
+        renderGroup("negative-grouping", negativeGroups.grouping, "negative");
+        renderGroup(
+          "negative-production",
+          negativeGroups.production,
+          "negative",
+        );
+        renderGroup("negative-structure", negativeGroups.structure, "negative");
+        renderGroup("negative-identity", negativeGroups.identity, "negative");
+        renderStylePacks();
+        renderPacks();
+
+        loadState();
+        if (!document.getElementById("lyricsBox").value.trim())
+          insertTemplate();
+        if (!document.getElementById("lyricsOutput").value.trim()) {
+          document.getElementById("lyricsOutput").value =
+            document.getElementById("lyricsBox").value;
+        }
+        setLyricsInsertMode(false);
+        generateOutputs();
+        updateLyricsSelection("lyricsBox");
+
+        document.addEventListener("click", (e) => {
+          const chip = e.target.closest(".chip");
+          if (chip) {
+            if (chip.dataset.target === "style" && lyricsInsertMode) {
+              insertStyleTermIntoLyrics(chip.dataset.term);
+            } else {
+              const target =
+                chip.dataset.target === "style" ? "styleBox" : "negativeBox";
+              toggleTerm(target, chip.dataset.term);
+            }
+            return;
+          }
+
+          const tagBtn = e.target.closest(".tag-btn");
+          if (tagBtn) {
+            insertTag(tagBtn.dataset.tag);
+            return;
+          }
+
+          const stylePackBtn = e.target.closest("[data-style-pack-index]");
+          if (stylePackBtn) {
+            const idx = Number(stylePackBtn.dataset.stylePackIndex);
+            addTermsToBox("styleBox", stylePacks[idx].terms);
+            return;
+          }
+
+          const packBtn = e.target.closest("[data-pack-index]");
+          if (packBtn) {
+            const idx = Number(packBtn.dataset.packIndex);
+            addTermsToBox("negativeBox", negativePacks[idx].terms);
+          }
+        });
+
+        document
+          .getElementById("addStyleTermBtn")
+          .addEventListener("click", () => {
+            const value = document
+              .getElementById("customStyleTerm")
+              .value.trim();
+            if (!value) return;
+            if (lyricsInsertMode) {
+              insertStyleTermIntoLyrics(value);
+              document.getElementById("customStyleTerm").value = "";
+            } else {
+              addCustomTerm("customStyleTerm", "styleBox");
+            }
+          });
+        document
+          .getElementById("addNegativeTermBtn")
+          .addEventListener("click", () =>
+            addCustomTerm("customNegativeTerm", "negativeBox"),
+          );
+        document
+          .getElementById("clearStyleBtn")
+          .addEventListener("click", () => {
+            document.getElementById("styleBox").value = "";
+            generateOutputs();
+          });
+        document
+          .getElementById("clearNegativeBtn")
+          .addEventListener("click", () => {
+            document.getElementById("negativeBox").value = "";
+            generateOutputs();
+          });
+        document
+          .getElementById("clearLyricsBtn")
+          .addEventListener("click", () => {
+            document.getElementById("lyricsBox").value = "";
+            document.getElementById("lyricsOutput").value = "";
+            generateOutputs();
+          });
+        document
+          .getElementById("pauseBtn")
+          .addEventListener("click", smartPause);
+        document
+          .getElementById("cleanupBtn")
+          .addEventListener("click", cleanupLyrics);
+        document
+          .getElementById("templateBtn")
+          .addEventListener("click", insertTemplate);
+        document
+          .getElementById("lyricsInsertModeBtn")
+          .addEventListener("click", () => {
+            setLyricsInsertMode(!lyricsInsertMode);
+            const target =
+              getLyricsEditor(activeLyricsTarget || "lyricsBox") ||
+              document.getElementById("lyricsBox");
+            target.focus();
+            updateLyricsSelection(target.id);
+          });
+
+        ["styleBox", "negativeBox", "lyricsBox", "lyricsOutput"].forEach(
+          (id) => {
+            document.getElementById(id).addEventListener("input", () => {
+              if (id === "lyricsOutput") updateLyricsSelection("lyricsOutput");
+              if (id === "lyricsBox") updateLyricsSelection("lyricsBox");
+              generateOutputs();
+            });
+          },
+        );
+
+        ["click", "keyup", "select", "focus"].forEach((evt) => {
+          document
+            .getElementById("lyricsBox")
+            .addEventListener(evt, () => updateLyricsSelection("lyricsBox"));
+          document
+            .getElementById("lyricsOutput")
+            .addEventListener(evt, () => updateLyricsSelection("lyricsOutput"));
+        });
+
+        document
+          .getElementById("styleSearch")
+          .addEventListener("input", () =>
+            filterChips("styleSearch", '.chip[data-target="style"]'),
+          );
+        document
+          .getElementById("negativeSearch")
+          .addEventListener("input", () =>
+            filterChips("negativeSearch", '.chip[data-target="negative"]'),
+          );
+
+        document.querySelectorAll(".copy-btn").forEach((btn) => {
+          btn.addEventListener("click", () =>
+            copyOutput(btn.dataset.copy, btn),
+          );
+        });
+
+        document
+          .getElementById("customStyleTerm")
+          .addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              const value = document
+                .getElementById("customStyleTerm")
+                .value.trim();
+              if (!value) return;
+              if (lyricsInsertMode) {
+                insertStyleTermIntoLyrics(value);
+                document.getElementById("customStyleTerm").value = "";
+              } else {
+                addCustomTerm("customStyleTerm", "styleBox");
+              }
+            }
+          });
+        document
+          .getElementById("customNegativeTerm")
+          .addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              addCustomTerm("customNegativeTerm", "negativeBox");
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
