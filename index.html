@@ -376,6 +376,13 @@
         box-shadow: 0 4px 14px rgba(37,99,235,0.3);
       }
 
+      .btn-mode-neg-active {
+        background: linear-gradient(135deg, #b45309, #92400e);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 4px 14px rgba(180,83,9,0.35);
+      }
+
       .btn-good {
         background: rgba(5, 150, 105, 0.07);
         color: #065f46;
@@ -674,6 +681,10 @@
 
               <div class="group-title">موانع إضافية حسب الحاجة</div>
               <div id="negative-identity" class="chips"></div>
+
+              <div class="actions" style="margin-bottom:10px">
+                <button class="btn" id="negativeInsertModeBtn" aria-pressed="false">إدراج في الشعر</button>
+              </div>
 
               <div class="tools-row">
                 <input id="customNegativeTerm" class="compact-input" type="text" placeholder="أضف مانعًا يدويًا، مثل: beatbox" />
@@ -991,6 +1002,7 @@
       ];
 
       let lyricsInsertMode = false;
+      let negativeInsertMode = false;
       let activeLyricsTarget = "lyricsBox";
       let lastLyricsSelections = {
         lyricsBox: { start: 0, end: 0, scrollTop: 0, scrollLeft: 0 },
@@ -1166,6 +1178,14 @@
         btn.classList.toggle("btn-mode-active", lyricsInsertMode);
         btn.setAttribute("aria-pressed", lyricsInsertMode ? "true" : "false");
         btn.textContent = lyricsInsertMode ? "تحرير قالب الشعر: مفعّل" : "تحرير قالب الشعر";
+      }
+
+      function setNegativeInsertMode(isOn) {
+        negativeInsertMode = Boolean(isOn);
+        const btn = document.getElementById("negativeInsertModeBtn");
+        btn.classList.toggle("btn-mode-neg-active", negativeInsertMode);
+        btn.setAttribute("aria-pressed", negativeInsertMode ? "true" : "false");
+        btn.textContent = negativeInsertMode ? "إدراج في الشعر: مفعّل" : "إدراج في الشعر";
       }
 
       function insertStyleTermIntoLyrics(term) {
@@ -1407,6 +1427,8 @@
           if (chip) {
             if (chip.dataset.target === "style" && lyricsInsertMode) {
               insertStyleTermIntoLyrics(chip.dataset.term);
+            } else if (chip.dataset.target === "negative" && negativeInsertMode) {
+              insertStyleTermIntoLyrics(chip.dataset.term);
             } else {
               const target = chip.dataset.target === "style" ? "styleBox" : "negativeBox";
               toggleTerm(target, chip.dataset.term);
@@ -1490,6 +1512,14 @@
         document.getElementById("templateBtn").addEventListener("click", insertTemplate);
         document.getElementById("lyricsInsertModeBtn").addEventListener("click", () => {
           setLyricsInsertMode(!lyricsInsertMode);
+          const target = document.getElementById("lyricsBox");
+          target.focus();
+          updateLyricsSelection();
+          generateOutputs("lyricsBox");
+        });
+
+        document.getElementById("negativeInsertModeBtn").addEventListener("click", () => {
+          setNegativeInsertMode(!negativeInsertMode);
           const target = document.getElementById("lyricsBox");
           target.focus();
           updateLyricsSelection();
