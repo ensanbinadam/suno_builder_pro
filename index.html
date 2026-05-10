@@ -965,65 +965,7 @@
           </div>
 
           <div class="panel-body">
-            <div class="output-card">
-              <div class="output-head">
-                <h3>ملف العمل</h3>
-                <div
-                  style="
-                    display: flex;
-                    gap: 8px;
-                    align-items: center;
-                    flex-wrap: wrap;
-                  "
-                >
-                  <button
-                    class="btn btn-good"
-                    id="exportJsonBtn"
-                    style="font-size: 0.82rem; padding: 5px 11px"
-                  >
-                    حفظ JSON
-                  </button>
-                  <button
-                    class="btn"
-                    id="importJsonBtn"
-                    style="font-size: 0.82rem; padding: 5px 11px"
-                  >
-                    استيراد JSON
-                  </button>
-                  <button
-                    class="btn btn-danger"
-                    id="newProjectBtn"
-                    style="font-size: 0.82rem; padding: 5px 11px"
-                  >
-                    مشروع جديد
-                  </button>
-                  <input
-                    id="importJsonFile"
-                    type="file"
-                    accept="application/json,.json"
-                    hidden
-                  />
-                </div>
-              </div>
-              <pre id="projectFileStatus">
-احفظ إعدادات العمل الحالية في ملف JSON أو استعد ملفًا محفوظًا.</pre
-              >
-            </div>
 
-            <div class="output-card">
-              <div class="output-head">
-                <h3>اسم العمل</h3>
-                <span class="counter">يستخدم في اسم ملف JSON</span>
-              </div>
-              <div style="padding: 12px 16px">
-                <input
-                  id="projectTitleBox"
-                  class="compact-input"
-                  type="text"
-                  placeholder="مثال: نشيد جدول الضرب للصف الثالث"
-                />
-              </div>
-            </div>
 
             <div class="output-card">
               <div class="output-head">
@@ -1092,6 +1034,64 @@
                 </div>
               </div>
               <pre id="negativeOutput"></pre>
+            </div>
+            <div class="output-card">
+              <div class="output-head">
+                <h3>ملف العمل</h3>
+                <div
+                  style="
+                    display: flex;
+                    gap: 8px;
+                    align-items: center;
+                    flex-wrap: wrap;
+                  "
+                >
+                  <button
+                    class="btn btn-good"
+                    id="exportJsonBtn"
+                    style="font-size: 0.82rem; padding: 5px 11px"
+                  >
+                    حفظ JSON
+                  </button>
+                  <button
+                    class="btn"
+                    id="importJsonBtn"
+                    style="font-size: 0.82rem; padding: 5px 11px"
+                  >
+                    استيراد JSON
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    id="newProjectBtn"
+                    style="font-size: 0.82rem; padding: 5px 11px"
+                  >
+                    مشروع جديد
+                  </button>
+                  <input
+                    id="importJsonFile"
+                    type="file"
+                    accept="application/json,.json"
+                    hidden
+                  />
+                </div>
+              </div>
+              <pre id="projectFileStatus">
+احفظ إعدادات العمل الحالية في ملف JSON أو استعد ملفًا محفوظًا.</pre
+              >
+            </div>
+            <div class="output-card">
+              <div class="output-head">
+                <h3>اسم العمل</h3>
+                <span class="counter">يستخدم في اسم ملف JSON</span>
+              </div>
+              <div style="padding: 12px 16px">
+                <input
+                  id="projectTitleBox"
+                  class="compact-input"
+                  type="text"
+                  placeholder="مثال: نشيد جدول الضرب للصف الثالث"
+                />
+              </div>
             </div>
           </div>
         </section>
